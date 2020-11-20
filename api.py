@@ -7,13 +7,23 @@ def get_rates(currencies, days=30):
     end_date = date.today()
     start_date = end_date - timedelta(days=days)
 
-    r = requests.get(f"https://api.exchangeratesapi.io/history?start_at={start_date}&end_at={end_date}&symbols={','.join(currencies)}")
+    symbols = ','.join(currencies)
+    requet = f"https://api.exchangeratesapi.io/history?start_at={start_date}&end_at={end_date}&symbols={symbols}"
+    r = requests.get(requet)
     if not r and not r.json():
         return False, False
 
     api_rates = r.json().get("rates")
-    pprint(api_rates)
-    return None, None
+    all_rates = {currency: [] for currency in currencies}
+    all_days = sorted(api_rates.keys())
+
+    for each_day in all_days:
+        [all_rates[currency].append(rate) for currency, rate in api_rates[each_day].items()]
+
+    return all_days, all_rates
+
 
 if __name__ == '__main__':
     days, rates = get_rates(currencies=["USD","CAD"])
+    pprint(days)
+    pprint(rates)
