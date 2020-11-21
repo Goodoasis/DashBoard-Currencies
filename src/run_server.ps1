@@ -1,1 +1,0 @@
-C:\Users\tibzt\Documents\git_hub\Dashboard-Currencies\env\Scripts\python.exe C:\Users\tibzt\Documents\git_hub\Dashboard-Currencies\src\manage.py runserver
