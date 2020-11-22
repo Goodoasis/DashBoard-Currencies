@@ -4,6 +4,16 @@ from pprint import pprint
 import requests
 
 def get_rates(currencies, days=30):
+    """call api of https://api.echangeratesapi.io/
+
+    Args:
+        currencies (list): list with devise in str. Example = ["CAD", "USD"]
+        days (int, optional): number of days. Defaults to 30 for 1 month.
+
+    Returns:
+        list: Contains each day. Example : ['2020-11-15', '2020-11-16']
+        dict: key = Devise, value = list of rates day by day. example: {"CAD": [1.5563, 1.558], "USD": [1.1856, 1.1819]}
+    """
     end_date = date.today()
     start_date = end_date - timedelta(days=days)
 
